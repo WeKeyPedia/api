@@ -4,7 +4,7 @@ steps = require './routes/steps'
 users = require './routes/users'
 users = require './routes/pages'
 
-port = 3000
+port = process.env.PORT or 3000
 
 app = express()
 
