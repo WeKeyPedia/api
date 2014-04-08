@@ -19,7 +19,7 @@ JSON response:
 ```json
 [
   {
-    "google_id": google id [OPTIONAL]
+    "google_id": google id [OPTIONAL],
     "christos_id": id [OPTIONAL]    
   },...
 ]
