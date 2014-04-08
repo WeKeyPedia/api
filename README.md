@@ -10,13 +10,13 @@ node.js api for the wekeypedia project
 
 CYPHER query:
 
-```
+```cypher
 MATCH (u:User) RETURN DISTINCT u
 ```
 
 JSON response:
 
-```
+```json
 [
   {
     "google_id": google id [OPTIONAL]
@@ -29,13 +29,13 @@ JSON response:
 
 CYPHER query:
 
-```
+```cypher
 MATCH (p:Page) RETURN DISTINCT p
 ```
 
 JSON response:
 
-```
+```json
 [
   {
     "url": url,
@@ -48,13 +48,13 @@ JSON response:
 
 CYPHER query:
 
-```
+```cypher
 MATCH (u:User)-[r:visited]->(p:Page) RETURN u, r, p
 ```
 
 JSON response:
 
-```
+```json
 [
   {
     "page": page url, 
