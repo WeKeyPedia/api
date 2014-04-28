@@ -8,8 +8,16 @@ port = process.env.PORT or 3000
 
 app = express()
 
+allowCrossDomain = (req, res, next)->
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+
+  next()
+
 app.configure ()->
   app.use express.logger('dev')
+  app.use allowCrossDomain
   app.use express.bodyParser()
 
 app.get('/visits', steps.findAll)
