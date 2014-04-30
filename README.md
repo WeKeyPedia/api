@@ -63,3 +63,14 @@ JSON response:
   },...
 ]
 ```
+
+### installation
+
+Easy peasy!
+
+```
+# git clone https://github.com/WeKeyPedia/api
+# cd api
+# npm install
+# forever -c coffee server.coffee
+```
