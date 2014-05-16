@@ -1,7 +1,11 @@
 express = require 'express'
 
+bodyParser = require 'body-parser'
+
 steps = require './routes/steps'
 users = require './routes/users'
+
+page = require './routes/page'
 pages = require './routes/pages'
 
 port = process.env.PORT or 3000
@@ -15,16 +19,18 @@ allowCrossDomain = (req, res, next)->
 
   next()
 
-app.configure ()->
-  app.use express.logger('dev')
-  app.use allowCrossDomain
-  app.use express.bodyParser()
+# app.use express.logger('dev')
+app.use allowCrossDomain
+app.use bodyParser()
 
-app.get('/visits', steps.findAll)
+# app.param("pageurl", /^\d+$/)
 
-app.get('/users', users.findAll)
-
-app.get('/pages', pages.findAll)
+app.route('/visits').get(steps.findAll)
+app.route('/users').get(users.findAll)
+app.route('/pages').get(pages.findAll)
+app.route('/page/:wiki_origin/wiki/:page').get(page.findLatestInfo)
+app.route('/page/:wiki_origin/wiki/:page/revision/:revision_id').get(page.findRevision)
+app.route('/page/:wiki_origin/wiki/:page/timeline').get(page.timeline)
 
 
 app.listen port
