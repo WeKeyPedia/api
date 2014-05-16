@@ -35,3 +35,20 @@ exports.findRevision = (req, res)->
 
 
 exports.timeline = (req, res)->
+  result = []
+
+  lang = (req.param("wiki_origin")).split(".")[0]
+  page = req.param("page")
+
+
+  client.connect "mongodb://#{mongo_address}/datasets", (err,db)->
+    datasets = db.collection("datasets")
+    
+    datasets.find({ url: /en\/Crimea\/revision\/.*/ },  { "url":1, "dataset.revid":1, "dataset.timestamp": 1 }).sort({ "dataset.timestamp": 1}).toArray (err,datasets)->
+      for dataset in datasets
+        console.log dataset
+        result.push 
+            timestamp: dataset.dataset[0].timestamp
+            revid: dataset.dataset[0].revid
+
+      res.json result
