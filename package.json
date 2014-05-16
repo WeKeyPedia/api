@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "~4.2.0",
     "request": "~2.34.0",
-    "mongodb": "~1.4.4"
+    "mongodb": "~1.4.4",
+    "body-parser": "*"
   }
 }
