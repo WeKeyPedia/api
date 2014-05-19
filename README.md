@@ -44,6 +44,33 @@ JSON response:
 ]
 ```
 
+### GET /page/:wikipedia_page_url_encoded
+
+Give a some meta information about available data about this page:
+
+- number of revisions stored as datasets
+- last revision
+
+### GET /page/:wikipedia_page_url_encoded/timeline
+
+Give a list of all revisions ordered by timestamps.
+
+- info:
+  - revision id
+  - timestamp
+
+### GET /page/:wikipedia_page_url_encoded/revision/:revision_id
+
+Proxy the datasets database and give back the json result from the corresponding wikipediage page#revision from the wikipedia API.
+
+- info
+  - author (IP or official id)
+  - timestamp
+  - comment
+  - content
+  - size
+
+
 ### GET /visits
 
 CYPHER query:
