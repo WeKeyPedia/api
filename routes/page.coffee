@@ -39,16 +39,14 @@ exports.timeline = (req, res)->
 
   lang = (req.param("wiki_origin")).split(".")[0]
   page = req.param("page")
-
+  url = req.param("url")
 
   client.connect "mongodb://#{mongo_address}/datasets", (err,db)->
     datasets = db.collection("datasets")
     
-    datasets.find({ url: /en\/Crimea\/revision\/.*/ },  { "url":1, "dataset.revid":1, "dataset.timestamp": 1 }).sort({ "dataset.timestamp": 1}).toArray (err,datasets)->
-      for dataset in datasets
-        console.log dataset
-        result.push 
-            timestamp: dataset.dataset[0].timestamp
-            revid: dataset.dataset[0].revid
-
-      res.json result
+#    datasets.findOne({ url: "#{lang}/#{page}/timeline" },  { "url":1, "dataset.revid":1, "dataset.timestamp": 1 }).sort({ "dataset.timestamp": 1}).toArray (err,dataset)->
+    datasets.findOne { url: "#{url}/timeline" }, (err,dataset)->
+      if error
+        res.send(500, "Cannot find timeline for page: #{url}")
+      else
+        res.json dataset.dataset
