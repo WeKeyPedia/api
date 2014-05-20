@@ -36,6 +36,7 @@ app.route('/pages').get(pages.findAll)
 app.route('/page/:wiki_origin/wiki/:page').get(page.findLatestInfo)
 app.route('/page/:wiki_origin/wiki/:page/revision/:revision_id').get(page.findRevision)
 app.route('/page/:wiki_origin/wiki/:page/timeline').get(page.timeline)
+app.route('/page/:wiki_origin/wiki/:page/revision/:revision_id/blocks').get(page.revisionBlocks)
 
 
 app.listen port
