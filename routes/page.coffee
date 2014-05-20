@@ -75,13 +75,14 @@ exports.revisionBlocks = (req, res)->
 
   # url = encodeURIComponent("http://#{lang}.wikipedia.org/wiki/#{page}")
   url = "#{lang}/#{page}/revision/#{revision_id}/blocks"
+  console.log url
 
   client.connect "mongodb://#{mongo_address}/datasets", (err,db)->
     # console.log err
     datasets = db.collection("datasets")
     
     # datasets.findOne({ url: "#{lang}/#{page}/timeline" },  { "url":1, "dataset.revid":1, "dataset.timestamp": 1 }).sort({ "dataset.timestamp": 1}).toArray (err,dataset)->
-    datasets.findOne { url: "#{url}/blocks" }, (error,dataset)->
+    datasets.findOne { url: "#{url}" }, (error,dataset)->
       if error || not dataset
         res.send(500, "Cannot find blocks for page: #{url}")
       else
