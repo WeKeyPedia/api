@@ -25,6 +25,11 @@ app.use bodyParser()
 
 # app.param("pageurl", /^\d+$/)
 
+app.param "page", (req, res, next, id)->
+  re = new RegExp("_", 'g')
+  req.page = id.replace(re, " ")
+  next()
+
 app.route('/visits').get(steps.findAll)
 app.route('/users').get(users.findAll)
 app.route('/pages').get(pages.findAll)
