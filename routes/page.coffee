@@ -39,7 +39,8 @@ exports.timeline = (req, res)->
 
   lang = (req.param("wiki_origin")).split(".")[0]
   page = req.param("page")
-  url = encodeURIComponent("http://#{lang}.wikipedia.org/wiki/#{page}")
+  # url = encodeURIComponent("http://#{lang}.wikipedia.org/wiki/#{page}")
+  url = "#{lang}/#{page}/timeline"
 
   client.connect "mongodb://#{mongo_address}/datasets", (err,db)->
     datasets = db.collection("datasets")
