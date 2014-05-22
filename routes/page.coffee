@@ -25,13 +25,13 @@ exports.findLatestInfo = (req, res)->
       console.log count
 
       # { "url":1, "dataset.revid":1, "dataset.timestamp": 1 }
-      datasets.findOne { url: { "$regex" : "#{lang}\/#{page}\/timeline" } },  { "url":1, "dataset.revid":1, "dataset.timestamp": 1 }, (err,timeline)->
+      datasets.findOne { url: { "$regex" : "#{lang}\/#{page}\/timeline" } },  { "url":1, "dataset": { "$slice": -1 },"dataset.revid":1, "dataset.timestamp": 1 }, (err,timeline)->
         console.log err
 
         if (err || not timeline)
           res.send(500, "no information for: #{page}")
         else        
-          console.log timeline.dataset[timeline.dataset.length-1]
+          console.log timeline.dataset[0]
 
           info.datasets.latest_rev = timeline.dataset[timeline.dataset.length-1].revid
           res.json(info)
